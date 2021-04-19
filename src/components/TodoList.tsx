@@ -2,6 +2,14 @@ import React from 'react';
 import { ITodoListProps } from '../interfaces'
 
 export const TodoList: React.FC<ITodoListProps> = ({ todos, onToggle, onRemove }) => {
+  if (todos.length === 0) {
+    return <p className="center"> Пока дел нет! </p>
+  }
+
+  const removeHandler = (event: React.MouseEvent, id: number) => {
+    event.preventDefault();
+    onRemove(id);
+  } 
   return (
     <ul>
       {
@@ -15,7 +23,7 @@ export const TodoList: React.FC<ITodoListProps> = ({ todos, onToggle, onRemove }
               <label>
                 <input type="checkbox" checked={todo.completed} onChange={onToggle.bind(null, todo.id)} />
                 <span> {todo.title} </span>
-                <i className="material-icons red-text" onClick={onRemove.bind(null, todo.id)} >delete</i>
+                <i className="material-icons red-text" onClick={(event) => removeHandler(event, todo.id)} >delete</i>
               </label>
             </li>
           );

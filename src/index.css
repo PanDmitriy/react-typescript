@@ -21,6 +21,7 @@ code {
 }
 .todo label {
   width: 100%;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -30,5 +31,4 @@ code {
 }
 .todo i {
   z-index: 2;
-  cursor: pointer;
 }
