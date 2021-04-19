@@ -1,30 +1,32 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
+import { ITodoFormProps } from '../interfaces';
 
-export const TodoForm: React.FC = () => {
-  const [ title, setTitle ] = useState<string>('')
+
+export const TodoForm: React.FC<ITodoFormProps> = props => {
+  const ref = useRef<HTMLInputElement>(null);
+
   const submitHandler = (event: React.FormEvent) => {
-    event.preventDefault()
+    event.preventDefault();
   };
-  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
-  }
   const keyPressHandler = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
-      setTitle("");
-    }
-  }
+      props.onAdd(ref.current!.value);
+      ref.current!.value = '';
+    };
+  };
 
 
   return (
     <div className="row mt2">
-    <form onSubmit={submitHandler} className="col s12">
+    <form 
+      onSubmit={submitHandler} 
+      className="col s12">
       <div className="row">
         <div className="input-field">
           <i className="material-icons prefix">mode_edit</i>
-          <input 
+          <input
+            ref={ref}
             onKeyPress={keyPressHandler} 
-            value={title} 
-            onChange={changeHandler} 
             id="icon_prefix2" 
             type="text"
           />
@@ -33,5 +35,5 @@ export const TodoForm: React.FC = () => {
       </div>
     </form>
   </div>
-  )
-}
+  );
+};

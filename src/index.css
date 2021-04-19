@@ -15,3 +15,20 @@ code {
 .mt2 {
   margin-top: 2rem;
 }
+
+.todo {
+  margin-top: 1rem;
+}
+.todo label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.todo.completed span {
+  text-decoration: line-through;
+}
+.todo i {
+  z-index: 2;
+  cursor: pointer;
+}
